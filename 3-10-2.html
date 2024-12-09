@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="index.html">index</a>
+    <script>
+        function ten(strten){
+            var binary = "";
+            if(strten>0){
+             while(strten>0){
+            var yushu = strten%2;
+            console.log(yushu);
+            binary=yushu+binary;
+            console.log(binary);
+            strten=Math.floor(strten/2);    
+             }            
+            }else if(strten==0){
+                return "0";
+            }else{
+                return "负数";
+            }
+            return binary;
+        
+    }
+        console.log(ten(11)); 
+    </script>
+</body>
+</html>

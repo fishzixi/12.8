@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id = "input1">
+    <button onclick="alert(base32(input1.value))">解码</button>
+    <script>
+        let input1 = document.querySelector("#input1");
+        function base32(str){
+            var base32 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123+/"
+            console.log(base32.length)
+            var res = "";
+            var arr = [];
+            for (i=0;i<str.length;i++){
+                var str_two = str[i].charCodeAt().toString(2).replace(/^/,"0000000").slice(-8);
+                arr.push(str_two);
+            }
+            var arr_join = arr.join("");
+            var arr_join6 = arr_join+("0").repeat(5-(arr_join.length%5));
+            var arr_join6List = arr_join6.match(/[01]{5}/g);
+            for(j=0;j<arr_join6List.length;j++){
+                var index = parseInt(arr_join6List[j],2);
+                res += base32[index];
+            }
+            return res;
+            // return alert("解码结果是"+res);
+        }
+
+        function anti_base32(str){
+            var base32 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123+/";
+            var arr = [];
+            var res = "";
+            for(i=0;i<str.length;i++){
+                var str_two = str[i].toString(2).replace(/^/,"0000").slice(-5);
+                arr.push(str_two);
+            }
+                arr_join=arr.join("");
+                
+            for(j=0;j<arr.length;j++){
+                var index=parseInt(arr[i]);
+
+            }
+        }
+
+
+    </script>
+</body>
+</html>

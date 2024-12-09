@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text">
+    <button onclick="base64(input.value)">解码</button>
+        <!-- 
+    J:00000001001010   a: 00000001100001  1: 0000000110001 A:00000001000001   
+    01001010 01100001 00110001 01000001 //每次循环只取最后八位，加七个0不影响
+   
+      -->
+      <a href="index.html">index</a>
+      <script>
+            var input = document.querySelector('input');
+          // console.log("&".charCodeAt());
+          function base64(str){
+              var base= "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvmxyz0123456789+/";
+            //   console.log (base.length);
+              var res = "";
+              var arr = [];
+              for(i=0;i<str.length;i++){
+                  var str_two = str[i].charCodeAt().toString(2).replace(/^/,"0000000").slice(-8);
+                  //转成十进制再转二进制，在开头替换成七个0；截取后八位
+                  // console.log(str_two);
+                  arr.push(str_two);
+              }
+                  var arr_join=arr.join("");
+                  var str_six = arr_join+("0").repeat(6-(arr_join.length%6));
+                  //将二进制数组连接成字符串，看是否是6的倍数，不是在某位加0，让他为6的倍数
+                  var str_6List = str_six.match(/[01]{6}/g);
+                  //让他6个一组分出来，match返回满足要求的数组，全局匹配
+                //   console.log(str_6List);
+                  for(j=0;j<str_6List.length;j++){
+                      var index = parseInt(str_6List[j],2);//把他转换为十进制，后面代表传的哪个，格式是二进制
+                    //   console.log(index);
+                      res += base[index];
+                      //将拿到的值去base里找
+                      
+                  }
+                  return alert("解码结果是"+res);
+          }
+        //   console.log(base64("Java"))
+      </script>
+</body>
+</html>
